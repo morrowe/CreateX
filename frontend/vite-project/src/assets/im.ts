@@ -22,6 +22,12 @@ import messanger from './messanger.png'
 import facebook from './facebook.png'
 import twitter from './twitter.png'
 import youtube from './youtube.png'
+import ic1 from './ic-house.png'
+import ic2 from './ic-construction.png'
+import ic3 from './ic-plan.png'
+import ic4 from './ic-pantone.png'
+import ic5 from './ic-painting.png'
+import convert from './convert.png'
 
 export const im = {
     logo:logo,
@@ -48,4 +54,10 @@ export const im = {
     facebook:facebook,
     twitter:twitter,
     youtube:youtube,
+    ic1:ic1,
+    ic2:ic2,
+    ic3:ic3,
+    ic4:ic4,
+    ic5:ic5,
+    convert:convert,
 }
