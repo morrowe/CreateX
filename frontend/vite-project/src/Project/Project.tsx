@@ -1,5 +1,5 @@
 import './Project.module.scss'
-
+import {im} from '../assets/im.ts'
 
 function Project() {
 
@@ -7,7 +7,38 @@ function Project() {
     <>
       <main>
         <section>
-
+          <div>
+            <p>Homepage / Work <span>/ Modern Cottage</span></p>
+            <h1>Modern Cottage</h1>
+            <div>
+              
+            </div>
+          </div>
+          <div>
+            <div>
+              <h2>Project goal</h2>
+              <p>Build a private house 840 sq. feet with a large living room, three bedrooms, two bathrooms, a terrace, a pool and a garage for two cars.</p>
+              <p>Modern design and care for each family member to feel as comfortable as possible in the new home.</p>
+            </div>
+            <div>
+              <div>
+                <p>LOCATION</p>
+                <p>CLIENT</p>
+                <p>ARCHITECT</p>
+                <p>SIZE</p>
+                <p>VALUE</p>
+                <p>COMPLETED</p>
+              </div>
+              <div>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+              </div>
+            </div>
+          </div>
         </section>
         <section>
           <div>
