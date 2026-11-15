@@ -1,7 +1,64 @@
+import { useState } from 'react'
 import './Service.module.scss'
 import {im} from '../assets/im.ts'
 
+interface ProjectItem {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+}
+
+const projectsData: ProjectItem[] = [
+  {
+    id: 1,
+    title: 'Kids Bedroom With Decorations',
+    category: 'Apartments & flats',
+    image: im.image1,
+  },
+  {
+    id: 2,
+    title: 'Modern Double Bedroom',
+    category: 'Apartments & flats',
+    image: im.image2,
+  },
+  {
+    id: 3,
+    title: 'Scandinavian Style Interior',
+    category: 'Private houses',
+    image: im.image3,
+  },
+  {
+    id: 4,
+    title: 'Minimalist Living Room',
+    category: 'Apartments & flats',
+    image: im.image1,
+  },
+  {
+    id: 5,
+    title: 'Luxury Wooden Cottage',
+    category: 'Private houses',
+    image: im.image2,
+  },
+  {
+    id: 6,
+    title: 'Scandinavian Style Interior',
+    category: 'Private houses',
+    image: im.image3,
+  },
+];
+
 function Service() {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const visibleCards = 3;
+  const maxIndex = Math.max(0, projectsData.length - visibleCards);
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+  };
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+  const stepWidth = 420;
 
   return (
     <>
@@ -112,46 +169,26 @@ function Service() {
             <div className="w-full flex items-center justify-between">
               <h2 className="text-[46px] font-bold text-[#1E212C] leading-tight">Related projects</h2>
               <div className="flex gap-[12px]">
-                <button className="w-[48px] h-[48px] flex items-center justify-center rounded-full text-[#424551] hover:bg-[#FF5A30] hover:text-white transition-colors cursor-pointer text-[18px]">←</button>
-                <button className="w-[48px] h-[48px] flex items-center justify-center rounded-full text-[#424551] hover:bg-[#FF5A30] hover:text-white transition-colors cursor-pointer text-[18px]">→</button>
+                <button onClick={handlePrev} aria-label="Previous slide" className="w-[48px] h-[48px] flex items-center justify-center rounded-full text-[#424551] hover:bg-[#FF5A30] hover:text-white transition-colors cursor-pointer text-[18px]"> ←</button>
+                <button onClick={handleNext} aria-label="Next slide" className="w-[48px] h-[48px] flex items-center justify-center rounded-full text-[#424551] hover:bg-[#FF5A30] hover:text-white transition-colors cursor-pointer text-[18px]"> → </button>
               </div>
             </div>
-            <div className="w-full flex gap-[30px]">
-              <div className="group w-[390px] h-[440px] bg-white rounded-xs shadow-[0_4px_16px_rgba(30,33,44,0.06)] overflow-hidden flex flex-col justify-between">
-                <div className="w-full h-[320px] group-hover:h-[240px] transition-all duration-300">
-                  <img src={im.image1} alt="" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-full h-[120px] group-hover:h-[200px] flex flex-col items-center justify-center text-center gap-[4px] group-hover:gap-[16px] transition-all duration-300 px-[20px]">
-                  <div className="flex flex-col items-center gap-[4px]">
-                    <p className="text-[20px] font-bold text-[#1E212C]">Kids Bedroom With Decorations</p>
-                    <p className="text-[14px] font-normal text-[#787A80]">Apartments & flats</p>
+            <div className="w-full overflow-hidden py-[16px] -my-[16px]">
+              <div className="flex gap-[30px] transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * stepWidth}px)` }}>
+                {projectsData.map((project) => (
+                  <div key={project.id} className="group shrink-0 w-[390px] h-[440px] bg-white rounded-xs shadow-[0_4px_16px_rgba(30,33,44,0.06)] overflow-hidden flex flex-col justify-between">
+                    <div className="w-full h-[320px] group-hover:h-[240px] transition-all duration-300">
+                      <img src={project.image} alt={project.title} className="w-full h-full object-cover"/>
+                    </div>
+                    <div className="w-full h-[120px] group-hover:h-[200px] flex flex-col items-center justify-center text-center gap-[4px] group-hover:gap-[16px] transition-all duration-300 px-[20px]">
+                      <div className="flex flex-col items-center gap-[4px]">
+                        <p className="text-[20px] font-bold text-[#1E212C]">{project.title}</p>
+                        <p className="text-[14px] font-normal text-[#787A80]">{project.category}</p>
+                      </div>
+                      <button className="opacity-0 group-hover:opacity-100 h-0 group-hover:h-[44px] w-[160px] border-2 border-[#FF5A30] text-[#FF5A30] text-[14px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#FF5A30] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden">View Project </button>
+                    </div>
                   </div>
-                  <button className="opacity-0 group-hover:opacity-100 h-0 group-hover:h-[44px] w-[160px] border-2 border-[#FF5A30] text-[#FF5A30] text-[14px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#FF5A30] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden">View Project</button>
-                </div>
-              </div>
-              <div className="group w-[390px] h-[440px] bg-white rounded-xs shadow-[0_4px_16px_rgba(30,33,44,0.06)] overflow-hidden flex flex-col justify-between">
-                <div className="w-full h-[320px] group-hover:h-[240px] transition-all duration-300">
-                  <img src={im.image2} alt="" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-full h-[120px] group-hover:h-[200px] flex flex-col items-center justify-center text-center gap-[4px] group-hover:gap-[16px] transition-all duration-300 px-[20px]">
-                  <div className="flex flex-col items-center gap-[4px]">
-                    <p className="text-[20px] font-bold text-[#1E212C]">Modern Double Bedroom</p>
-                    <p className="text-[14px] font-normal text-[#787A80]">Apartments & flats</p>
-                  </div>
-                  <button className="opacity-0 group-hover:opacity-100 h-0 group-hover:h-[44px] w-[160px] border-2 border-[#FF5A30] text-[#FF5A30] text-[14px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#FF5A30] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden">View Project</button>
-                </div>
-              </div>
-              <div className="group w-[390px] h-[440px] bg-white rounded-xs shadow-[0_4px_16px_rgba(30,33,44,0.06)] overflow-hidden flex flex-col justify-between">
-                <div className="w-full h-[320px] group-hover:h-[240px] transition-all duration-300">
-                  <img src={im.image3} alt="" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-full h-[120px] group-hover:h-[200px] flex flex-col items-center justify-center text-center gap-[4px] group-hover:gap-[16px] transition-all duration-300 px-[20px]">
-                  <div className="flex flex-col items-center gap-[4px]">
-                    <p className="text-[20px] font-bold text-[#1E212C]">Scandinavian Style Interior</p>
-                    <p className="text-[14px] font-normal text-[#787A80]">Private houses</p>
-                  </div>
-                  <button className="opacity-0 group-hover:opacity-100 h-0 group-hover:h-[44px] w-[160px] border-2 border-[#FF5A30] text-[#FF5A30] text-[14px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#FF5A30] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden">View Project</button>
-                </div>
+                ))}
               </div>
             </div>
             <div className="w-full flex items-center justify-center gap-[40px]">
