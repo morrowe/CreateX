@@ -1,9 +1,9 @@
 import logo from './logo.png'
+import logo2 from './logo2.png'
 import play from './play.png'
 import video from './video.png'
 import phone from './phone.png'
 import chat from './chat.png'
-import image from './image.jpg'
 import offer from './offer.png'
 import partner1 from './partner1.png'
 import partner2 from './partner2.png'
@@ -62,9 +62,9 @@ import clients from './clients.png'
 
 export const im = {
     logo:logo,
+    logo2:logo2,
     play:play,
     video:video,
-    image:image,
     phone:phone,
     chat:chat,
     offer:offer,

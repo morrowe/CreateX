@@ -30,6 +30,8 @@ function App() {
             <Route index path="/news" element={<News/>} />
             <Route index path="/post" element={<Post/>} />
             <Route index path="/contacts" element={<Contacts/>} />
+            <Route path="/services/:slug" element={<Service />} />
+
           </Routes>
         <Footer />
       </BrowserRouter>
