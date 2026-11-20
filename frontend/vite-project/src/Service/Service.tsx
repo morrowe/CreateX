@@ -1,16 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from "axios"
+import { NavLink } from 'react-router-dom';
 import './Service.module.scss'
 import {im} from '../assets/im.ts'
-
 
 interface ServiceOffer {
   id: number;
   title: string;
   description: string;
 }
-interface ServiceResponse {
+interface ServiceStep {
+  id: number;
+  step_number: number;
+  title: string;
+  description: string;
+}
+interface PlanFeature {
+  id: number;
+  name: string;
+  note: string | null;
+}
+interface PricingPlan {
+  id: number;
+  name: string;
+  price_per_m2: number;
+  term_days: number;
+  features: PlanFeature[];
+}
+interface FeatureItem {
+  id: number;
+  name: string;
+}
+interface ServiceData {
   id: number;
   title: string;
   slug: string;
@@ -18,66 +39,50 @@ interface ServiceResponse {
   description: string;
   image_url: string;
   offers: ServiceOffer[];
+  steps: ServiceStep[];
+  plans: PricingPlan[];
+  features: FeatureItem[];
 }
-
+interface AdvantageItem {
+  id: number;
+  section: string;
+  title: string;
+  description: string;
+  icon_url: string;
+  sort_order: number;
+}
 interface ProjectItem {
   id: number;
   title: string;
+  slug: string;
+  image_url: string;
+  completed_date: string;
+  service: string;
+  service_slug: string;
   category: string;
-  image: string;
 }
 
-const projectsData: ProjectItem[] = [
-  {
-    id: 1,
-    title: 'Kids Bedroom With Decorations',
-    category: 'Apartments & flats',
-    image: im.image1,
-  },
-  {
-    id: 2,
-    title: 'Modern Double Bedroom',
-    category: 'Apartments & flats',
-    image: im.image2,
-  },
-  {
-    id: 3,
-    title: 'Scandinavian Style Interior',
-    category: 'Private houses',
-    image: im.image3,
-  },
-  {
-    id: 4,
-    title: 'Minimalist Living Room',
-    category: 'Apartments & flats',
-    image: im.image1,
-  },
-  {
-    id: 5,
-    title: 'Luxury Wooden Cottage',
-    category: 'Private houses',
-    image: im.image2,
-  },
-  {
-    id: 6,
-    title: 'Scandinavian Style Interior',
-    category: 'Private houses',
-    image: im.image3,
-  },
-];
+
 
 function Service() {
   const { slug } = useParams<{ slug: string }>();
-  const [offers, setOffers] = useState<ServiceOffer[]>([]);
+  const [data, setData] = useState<ServiceData | null>(null);
+  const [openOfferIndex, setOpenOfferIndex] = useState<number | null>(0);
   useEffect(() => {
-    if (!slug) return;
-    axios
-      .get<ServiceResponse>(`http://localhost:3000/api/services/${slug}`)
-      .then((res) => setOffers(res.data.offers))
+    const currentSlug = slug || 'interior-design';
+    fetch(`http://localhost:3000/api/services/${currentSlug}`)
+      .then((res) => res.json())
+      .then((result: ServiceData) => setData(result))
       .catch((err) => console.error(err));
   }, [slug]);
-
-
+//
+  const [projectsData, setProjectsData] = useState<ProjectItem[]>([]);
+  useEffect(() => {
+    fetch('http://localhost:3000/api/projects')
+      .then((res) => res.json())
+      .then((result: ProjectItem[]) => setProjectsData(result))
+      .catch((err) => console.error(err));
+  }, []);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const visibleCards = 3;
   const maxIndex = Math.max(0, projectsData.length - visibleCards);
@@ -88,6 +93,15 @@ function Service() {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
   const stepWidth = 420;
+
+  const [benefits, setBenefits] = useState<AdvantageItem[]>([]);
+  useEffect(() => {
+    fetch('http://localhost:3000/api/advantages?section=benefit')
+      .then((res) => res.json())
+      .then((result: AdvantageItem[]) => setBenefits(result))
+      .catch((err) => console.error(err));
+  }, []);
+
 
   return (
     <>
@@ -109,22 +123,27 @@ function Service() {
           <div className="w-full h-[48px] md:h-[80px] lg:h-[100px]"></div>
           <div className="w-[92%] max-w-[1230px] flex flex-col lg:flex-row items-center justify-between gap-[32px] md:gap-[60px] lg:gap-[124px]">
             <div className="w-full lg:w-[495px] h-[260px] sm:h-[340px] lg:h-[378px]">
-              <img src={im.offer} alt="" className="w-full h-full object-cover rounded-sm" />
+              <img src={data?.image_url || im.offer} alt="" className="w-full h-full object-cover rounded-sm" />
             </div>
             <div className="w-full lg:w-[600px] flex flex-col gap-[20px] md:gap-[24px]">
               <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] font-bold text-[#1E212C] dark:text-white leading-tight">We offer</h2>
               <div className="flex flex-col gap-[20px]">
-                <div className="flex gap-[16px] items-start">
-                  <span className="text-[#FF5A30] text-[28px] font-bold leading-none">—</span>
-                  <div className="flex flex-col gap-[12px]">
-                    <h4 className="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-[#1E212C] dark:text-white leading-snug">Interior design of apartments</h4>
-                    <p className="text-[#787A80] dark:text-[#A0A3AB] text-[15px] sm:text-[16px] font-normal leading-relaxed">Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massa ac facilisis.</p>
-                  </div>
-                </div>
-                <div className="flex gap-[16px] items-center">
-                  <span className="text-[#FF5A30] text-[28px] font-bold leading-none">+</span>
-                  <h4 className="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-[#1E212C] dark:text-white leading-snug">Interior design of private houses</h4>
-                </div>
+                {data?.offers.map((offer, index) =>
+                  openOfferIndex === index ? (
+                    <div key={offer.id} onClick={() => setOpenOfferIndex(null)} className="flex gap-[16px] items-start">
+                      <span className="text-[#FF5A30] text-[28px] font-bold leading-none">—</span>
+                      <div className="flex flex-col gap-[12px]">
+                        <h4 className="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-[#1E212C] dark:text-white leading-snug">{offer.title}</h4>
+                        <p className="text-[#787A80] dark:text-[#A0A3AB] text-[15px] sm:text-[16px] font-normal leading-relaxed">{offer.description}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div key={offer.id} onClick={() => setOpenOfferIndex(index)} className="flex gap-[16px] items-center">
+                      <span className="text-[#FF5A30] text-[28px] font-bold leading-none">+</span>
+                      <h4 className="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-[#1E212C] dark:text-white leading-snug">{offer.title}</h4>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -134,43 +153,22 @@ function Service() {
           <div className="w-[92%] max-w-[1230px] flex flex-col gap-[32px] md:gap-[48px] lg:gap-[64px]">
             <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] font-bold text-[#1E212C] dark:text-white leading-tight">That’s how we do it</h2>
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[30px]">
-              <div className="w-full flex flex-col gap-[16px]">
-                <div className="flex items-center gap-[20px] w-full">
-                  <span className="text-[36px] lg:text-[46px] font-bold text-[#D7D9DF] dark:text-[#3A3E4A] leading-none">01</span>
-                  <div className="flex-1 h-px border-t border-dashed border-[#B3B7BC] dark:border-[#4A4E5A]"></div>
+              {data?.steps.map((step, index) => (
+                <div key={step.id} className="w-full flex flex-col gap-[16px]">
+                  {index < data.steps.length - 1 ? (
+                    <div className="flex items-center gap-[20px] w-full">
+                      <span className="text-[36px] lg:text-[46px] font-bold text-[#D7D9DF] dark:text-[#3A3E4A] leading-none">{String(step.step_number).padStart(2, '0')}</span>
+                      <div className="flex-1 h-px border-t border-dashed border-[#B3B7BC] dark:border-[#4A4E5A]"></div>
+                    </div>
+                  ) : (
+                    <span className="text-[36px] lg:text-[46px] font-bold text-[#D7D9DF] dark:text-[#3A3E4A] leading-none">{String(step.step_number).padStart(2, '0')}</span>
+                  )}
+                  <div className="flex flex-col gap-[8px]">
+                    <p className="text-[16px] font-bold text-[#1E212C] dark:text-white">{step.title}</p>
+                    <p className="text-[#787A80] dark:text-[#A0A3AB] text-[14px] font-normal leading-relaxed">{step.description}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[16px] font-bold text-[#1E212C] dark:text-white">Work Estimate</p>
-                  <p className="text-[#787A80] dark:text-[#A0A3AB] text-[14px] font-normal leading-relaxed">Culpa nostrud commodo ea consequat aliquip reprehenderit.</p>
-                </div>
-              </div>
-              <div className="w-full flex flex-col gap-[16px]">
-                <div className="flex items-center gap-[20px] w-full">
-                  <span className="text-[36px] lg:text-[46px] font-bold text-[#D7D9DF] dark:text-[#3A3E4A] leading-none">02</span>
-                  <div className="flex-1 h-px border-t border-dashed border-[#B3B7BC] dark:border-[#4A4E5A]"></div>
-                </div>
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[16px] font-bold text-[#1E212C] dark:text-white">Contract</p>
-                  <p className="text-[#787A80] dark:text-[#A0A3AB] text-[14px] font-normal leading-relaxed">Laoreet ultrices curabitur luctus quisque consequat. Leo lorem velit imperdiet auctor et tempor.</p>
-                </div>
-              </div>
-              <div className="w-full flex flex-col gap-[16px]">
-                <div className="flex items-center gap-[20px] w-full">
-                  <span className="text-[36px] lg:text-[46px] font-bold text-[#D7D9DF] dark:text-[#3A3E4A] leading-none">03</span>
-                  <div className="flex-1 h-px border-t border-dashed border-[#B3B7BC] dark:border-[#4A4E5A]"></div>
-                </div>
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[16px] font-bold text-[#1E212C] dark:text-white">Mobilization</p>
-                  <p className="text-[#787A80] dark:text-[#A0A3AB] text-[14px] font-normal leading-relaxed">Odio massa scelerisque purus arcu sed velit eleifend cursus leo.</p>
-                </div>
-              </div>
-              <div className="w-full flex flex-col gap-[16px]">
-                <span className="text-[36px] lg:text-[46px] font-bold text-[#D7D9DF] dark:text-[#3A3E4A] leading-none">04</span>
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[16px] font-bold text-[#1E212C] dark:text-white">Construction Work</p>
-                  <p className="text-[#787A80] dark:text-[#A0A3AB] text-[14px] font-normal leading-relaxed">Adipiscing esse aliqua aliquip qui amet. Aute eiusmod dolore dolore et ad et veniam ad deserunt.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="w-full h-[48px] md:h-[80px] lg:h-[100px]"></div>
@@ -183,31 +181,22 @@ function Service() {
               <p className="text-[16px] sm:text-[18px] font-normal text-white/60">Our mission is to set the highest standards for construction sphere.</p>
             </div>
             <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-[32px] lg:gap-[20px]">
-              <div className="w-full lg:w-[285px] flex flex-col items-center text-center gap-[16px]">
-                <img src={im.project1} alt="" className="w-[40px] h-[40px] object-contain" />
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[20px] font-bold text-white">Fixed Terms & Cost</p>
-                  <p className="text-[16px] font-normal text-white/60 leading-relaxed">Culpa nostrud commodo ea consequat aliquip reprehenderit. Veniam velit nostrud aliquip sunt.</p>
+              {benefits.map((item, index) => (
+                <div key={item.id} className="w-full lg:w-auto flex flex-col lg:flex-row items-center justify-between gap-[32px] lg:gap-[94px]">
+                  <div className="w-full lg:w-[285px] flex flex-col items-center text-center gap-[16px]">
+                    <img src={item.icon_url} alt="" className="w-[40px] h-[40px] object-contain" />
+                    <div className="flex flex-col gap-[8px]">
+                      <p className="text-[20px] font-bold text-white">{item.title}</p>
+                      <p className="text-[16px] font-normal text-white/60 leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
+                  {index < benefits.length - 1 && (
+                    <div className="w-full h-px lg:w-px lg:h-[140px] bg-gradient-to-r lg:bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                  )}
                 </div>
-              </div>
-              <div className="w-full h-px lg:w-px lg:h-[140px] bg-gradient-to-r lg:bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-              <div className="w-full lg:w-[285px] flex flex-col items-center text-center gap-[16px]">
-                <img src={im.project2} alt="" className="w-[40px] h-[40px] object-contain" />
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[20px] font-bold text-white">Qualified Workers</p>
-                  <p className="text-[16px] font-normal text-white/60 leading-relaxed">Anim reprehenderit sint voluptate exercitation adipisicing laborum adipisicing. Minim empor est ea.</p>
-                </div>
-              </div>
-              <div className="w-full h-px lg:w-px lg:h-[140px] bg-gradient-to-r lg:bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-              <div className="w-full lg:w-[285px] flex flex-col items-center text-center gap-[16px]">
-                <img src={im.project3} alt="" className="w-[40px] h-[40px] object-contain" />
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[20px] font-bold text-white">Supervision & Control</p>
-                  <p className="text-[16px] font-normal text-white/60 leading-relaxed">Sit veniam aute dolore adipisicing nulla sit culpa. Minim mollit voluptate ullamco proident ea ad.</p>
-                </div>
-              </div>
+              ))}
             </div>
-            <button className="w-[242px] h-[52px] bg-[#FF5A30] text-white text-[16px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#e04e28] transition-colors cursor-pointer relative top-6 lg:top-10">Discuss a project</button>
+            <button className="w-[242px] h-[52px] bg-[#FF5A30] text-white text-[16px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#e04e28] transition-colors cursor-pointer relative top-[48px] md:top-[72px] lg:top-[106px]">Discuss a project</button>
           </div>
           <div className="w-full h-[48px] md:h-[72px] lg:h-[80px]"></div>
         </section>
@@ -221,13 +210,13 @@ function Service() {
                   <button onClick={handleNext} aria-label="Next slide" className="w-[48px] h-[48px] flex items-center justify-center rounded-full text-[#424551] dark:text-[#D1D3D8] hover:bg-[#FF5A30] hover:text-white transition-colors cursor-pointer text-[18px]">→</button>
                 </div>
               </div>
-              <div className="w-full overflow-hidden flex flex-col gap-[16px]">
+                <div className="w-full overflow-hidden flex flex-col gap-[16px]">
                 <div className="w-full h-[1px]"></div>
                 <div className="flex gap-[20px] md:gap-[30px] transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * stepWidth}px)` }}>
                   {projectsData.map((project) => (
                   <div key={project.id} className="group shrink-0 w-[290px] sm:w-[340px] lg:w-[390px] h-[400px] lg:h-[440px] bg-white dark:bg-[#1A1D24] rounded-xs overflow-hidden flex flex-col justify-between shadow-[0_4px_16px_rgba(30,33,44,0.06)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-colors duration-300">
                     <div className="w-full h-[280px] lg:h-[320px] group-hover:h-[210px] lg:group-hover:h-[240px] transition-all duration-300">
-                      <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                      <img src={project.image_url} alt={project.title} className="w-full h-full object-cover" />
                     </div>
                     <div className="w-full h-[120px] group-hover:h-[190px] lg:group-hover:h-[200px] flex flex-col items-center justify-center text-center gap-[4px] group-hover:gap-[16px] transition-all duration-300">
                       <div className="w-[90%] flex flex-col items-center gap-[4px]">

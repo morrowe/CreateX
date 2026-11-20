@@ -339,7 +339,7 @@ INSERT INTO company_history (event_date, title, description) VALUES
 ('2015-07-01', 'New Jersey office',      'Second office opens in New Jersey.'),
 ('2018-11-01', 'San Francisco office',   'Expansion to the West Coast.'),
 ('2019-03-01', 'Industry award',         'Recognized among the best construction companies in the USA.'),
-('2020-06-01', 'Present',                '20 years of experience in construction.');
+('2020-06-01', 'Present',                'Bcelerisque dapibus pharetra nibh semper iaculis duis viverra porttitor in. Eu nec vitae, malesuada vitae egestas integer et morbi. Maecenas sed quis diam posuere malesuada magnis. Bcelerisque dapibus.  Eu nec vitae, ');
 
 -- home about us ---------------------------------------------------------------
 INSERT INTO statistics (page, value, label, sort_order) VALUES
@@ -385,7 +385,7 @@ INSERT INTO services (title, slug, short_text, description, image_url) VALUES
 
 INSERT INTO service_offers (service_id, title, description) VALUES
 (3, 'Interior design of apartments',     'Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massa ac facilisis.'),
-(3, 'Interior design of private houses', '');
+(3, 'Interior design of private houses', 'Imperdiet elementum faucibus dignissim purus. Imperdiet elementum faucibus dignissim purus.');
 
 INSERT INTO service_steps (service_id, step_number, title, description) VALUES
 (3, 1, 'Work Estimate',        'Culpa nostrud commodo ea consequat aliquip reprehenderit.'),
@@ -428,15 +428,15 @@ INSERT INTO project_categories (name) VALUES
 INSERT INTO projects
     (service_id, category_id, title, slug, image_url, goal, location, client_name, architect, size_sq_feet, value_usd, completed_date)
 VALUES
-(1, 1, 'Cubes Building',               'cubes-building',        '/img/projects/cubes.jpg',     'Business center with modern offices.',           'New York',                     'Metro Estates',     'HIK Architecture', 12000, 15000000, '2019-09-01'),
-(1, 1, 'Red Finger Building',          'red-finger-building',   '/img/projects/red.jpg',       'Business center in the city centre.',            'New York',                     'Skyline Group',     'HIK Architecture',  9000, 11000000, '2018-04-01'),
-(1, 4, 'The Pencil Building',          'the-pencil-building',   '/img/projects/pencil.jpg',    'Shopping mall with a distinctive shape.',        'San Francisco',                'Green Homes',       'HIK Architecture',  7000,  8000000, '2017-11-01'),
-(1, 3, 'Modern Cottage',               'modern-cottage',        '/img/projects/cottage.jpg',   'Build a private house 840 sq. feet with a large living room, three bedrooms, two bathrooms, a terrace, a pool and a garage for two cars.', '2464 Royal Ln. Mesa, New Jersey', 'Darlene Robertson', 'HIK Architecture',   840,  2000000, '2020-05-01'),
-(2, 3, 'Luxury Beach House',           'luxury-beach-house',    '/img/projects/beach.jpg',     'Design a house on the beach.',                   'New Jersey',                   'Metro Estates',     'HIK Architecture',  1500,  3500000, '2019-06-01'),
-(3, 2, 'Modern Double Bedroom',        'modern-double-bedroom', '/img/projects/bedroom.jpg',   'Interior of a double bedroom.',                  'New York',                     'Skyline Group',     NULL,                 300,    40000, '2020-02-01'),
-(3, 2, 'Kids Bedroom With Decorations','kids-bedroom',          '/img/projects/kids.jpg',      'Cozy bedroom for kids.',                         'New York',                     'Green Homes',       NULL,                 250,    30000, '2019-12-01'),
-(3, 3, 'Scandinavian Style Interior',  'scandinavian-interior', '/img/projects/scandi.jpg',    'Scandinavian interior for a private house.',     'San Francisco',                'Metro Estates',     NULL,                1200,   90000, '2020-03-01'),
-(4, 3, 'Brown and Gray Painted House', 'brown-gray-house',      '/img/projects/brown.jpg',     'Full repair and repainting of a house.',         'New Jersey',                   'Green Homes',       NULL,                1000,   60000, '2019-08-01');
+(1, 1, 'Cubes Building',               'cubes-building',        '/src/assets/cubes.jpg',     'Business center with modern offices.',           'New York',                     'Metro Estates',     'HIK Architecture', 12000, 15000000, '2019-09-01'),
+(1, 1, 'Red Finger Building',          'red-finger-building',   '/src/assets/red.jpg',       'Business center in the city centre.',            'New York',                     'Skyline Group',     'HIK Architecture',  9000, 11000000, '2018-04-01'),
+(1, 4, 'The Pencil Building',          'the-pencil-building',   '/src/assets/pencil.jpg',    'Shopping mall with a distinctive shape.',        'San Francisco',                'Green Homes',       'HIK Architecture',  7000,  8000000, '2017-11-01'),
+(1, 3, 'Modern Cottage',               'modern-cottage',        '/src/assets/cottage.jpg',   'Build a private house 840 sq. feet with a large living room, three bedrooms, two bathrooms, a terrace, a pool and a garage for two cars.', '2464 Royal Ln. Mesa, New Jersey', 'Darlene Robertson', 'HIK Architecture',   840,  2000000, '2020-05-01'),
+(2, 3, 'Luxury Beach House',           'luxury-beach-house',    '/src/assets/beach.jpg',     'Design a house on the beach.',                   'New Jersey',                   'Metro Estates',     'HIK Architecture',  1500,  3500000, '2019-06-01'),
+(3, 2, 'Modern Double Bedroom',        'modern-double-bedroom', '/src/assets/bedroom.jpg',   'Interior of a double bedroom.',                  'New York',                     'Skyline Group',     NULL,                 300,    40000, '2020-02-01'),
+(3, 2, 'Kids Bedroom With Decorations','kids-bedroom',          '/src/assets/kids.jpg',      'Cozy bedroom for kids.',                         'New York',                     'Green Homes',       NULL,                 250,    30000, '2019-12-01'),
+(3, 3, 'Scandinavian Style Interior',  'scandinavian-interior', '/src/assets/scandi.jpg',    'Scandinavian interior for a private house.',     'San Francisco',                'Metro Estates',     NULL,                1200,   90000, '2020-03-01'),
+(4, 3, 'Brown and Gray Painted House', 'brown-gray-house',      '/src/assets/brown.jpg',     'Full repair and repainting of a house.',         'New Jersey',                   'Green Homes',       NULL,                1000,   60000, '2019-08-01');
 
 INSERT INTO project_solutions (project_id, text) VALUES
 (4, 'Vitae ultrices ornare eu sed in est quisque duis id.'),
@@ -447,8 +447,8 @@ INSERT INTO project_solutions (project_id, text) VALUES
 (4, 'Integer ultricies viverra ut enim viverra ut.');
 
 INSERT INTO testimonials (project_id, author_name, position, company, text) VALUES
-(4, 'Shawn Edwards', 'Position', 'Company name', 'Ipsum aute sunt aliquip aute et occaecat. Anim minim do cillum eiusmod enim. Consectetur magna cillum consequat minim laboris cillum laboris voluptate minim proident exercitation ullamco.'),
-(NULL, 'Darlene Robertson', 'Owner', 'Private client', 'Great team, everything was finished on time and within the budget.');
+(4, 'Shawn Edwards', 'Position', 'Company name', 'Ipsum aute sunt aliquip aute et occaecat. Anim minim do cillum eiusmod enim. Consectetur magna cillum consequat minim laboris cillum laboris voluptate minim proident exercitation ullamco.', '/src/assets/profile.png'),
+(NULL, 'Darlene Robertson', 'Owner', 'Private client', 'Great team, everything was finished on time and within the budget. Consectetur magna cillum consequat minim laboris cillum laboris voluptate minim proident exercitation ullamco.', '/src/assets/profile2.png');
 
 -- avaible ------------------------------------------------------------
 INSERT INTO vacancies (office_id, title, employment_type) VALUES
@@ -482,27 +482,27 @@ INSERT INTO news_posts (category_id, author_id, title, slug, preview_text, conte
 (3, 1, 'How to Build Climate Change-Resilient Infrastructure', 'climate-resilient-infrastructure',
     'Ipsum aliquet nisi, hendrerit rhoncus quam tortor, maecenas faucibus. Tincidunt aliquet sit vel, venenatis nulla...',
     'Vulputate vitae pellentesque scelerisque luctus consequat mattis pellentesque dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue.',
-    '/img/news/1.jpg', '2020-06-24'),
+    '/src/assets/news1.png', '2020-06-24'),
 (2, 1, 'How Construction Can Help Itself', 'how-construction-can-help-itself',
     'Porta habitant vitae quam interdum. Leo viverra non volutpat rhoncus placerat vitae scelerisque...',
     'Porta habitant vitae quam interdum. Leo viverra non volutpat rhoncus placerat vitae scelerisque.',
-    '/img/news/2.jpg', '2020-06-12'),
+    '/src/assets/news2.png', '2020-06-12'),
 (4, 1, 'The Difference Between a Digger and an Excavator', 'digger-vs-excavator',
     'Cras est nisi purus velit facilisi vitae, dolor. Lorem scelerisque integer duis et nulla lobortis cursus...',
     'Cras est nisi purus velit facilisi vitae, dolor. Lorem scelerisque integer duis et nulla lobortis cursus.',
-    '/img/news/3.jpg', '2020-05-16'),
+    '/src/assets/news3.png', '2020-05-16'),
 (4, 1, 'Building Construction Hand Tools', 'building-construction-hand-tools',
     'Tellus quis aliquet volutpat nunc pulvinar donec sed sapien. Vitae elit id dolor, tristique massa...',
     'Tellus quis aliquet volutpat nunc pulvinar donec sed sapien.',
-    '/img/news/4.jpg', '2020-02-25'),
+    '/src/assets/news4.png', '2020-02-25'),
 (3, 1, 'Top 10 Construction Trends', 'top-10-construction-trends',
     'Dignissim sed enim, eleifend morbi condimentum. Congue id quis vulputate dignissim eget...',
     'Dignissim sed enim, eleifend morbi condimentum. Congue id quis vulputate dignissim eget.',
-    '/img/news/5.jpg', '2020-01-14'),
+    '/src/assets/news5.png', '2020-01-14'),
 (1, 1, 'Types of Flooring Materials', 'types-of-flooring-materials',
     'Maecenas donec lacinia nunc, quam sit magnis mauris. Neque bibendum et mauris, aenean...',
     'Maecenas donec lacinia nunc, quam sit magnis mauris.',
-    '/img/news/6.jpg', '2019-12-01');
+    '/src/assets/news6.png', '2019-12-01');
 
 -- Комментарии (4 к первой статье, 1 к четвёртой) ----------------------
 INSERT INTO comments (post_id, user_id, parent_id, author_name, email, content, created_at) VALUES
@@ -551,3 +551,6 @@ INSERT INTO comments (post_id, user_id, parent_id, author_name, email, content, 
 -- Вакансии с городом офиса
 -- SELECT v.title, v.employment_type, o.city
 -- FROM vacancies v JOIN offices o ON o.id = v.office_id WHERE v.is_active;
+
+-- npm install react-simple-maps
+-- npm install -D @types/react-simple-maps

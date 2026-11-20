@@ -20,9 +20,6 @@ import partner12 from './partner12.png'
 import project1 from './project1.png'
 import project2 from './project2.png'
 import project3 from './project3.png'
-import image1 from './image1.png'
-import image2 from './image2.png'
-import image3 from './image3.png'
 import whatsapp from './whatsapp.png'
 import messanger from './messanger.png'
 import facebook from './facebook.png'
@@ -59,6 +56,14 @@ import budget from './budget.png'
 import brain from './brain.png'
 import profile from './profile.png'
 import clients from './clients.png'
+import history from './history.png'
+import lin from './lin.png'
+import twi from './twi.png'
+import fac from './fac.png'
+import chat2 from './chat2.png'
+import news1 from './news1.png'
+import reply from './reply.png'
+import contact from './contact.png'
 
 export const im = {
     logo:logo,
@@ -83,9 +88,6 @@ export const im = {
     project1:project1,
     project2:project2,
     project3:project3,
-    image1:image1,
-    image2:image2,
-    image3:image3,
     whatsapp:whatsapp,
     messanger:messanger,
     facebook:facebook,
@@ -122,4 +124,12 @@ export const im = {
     brain:brain,
     profile:profile,
     clients:clients,
+    history:history,
+    fac:fac,
+    twi:twi,
+    lin:lin,
+    chat2:chat2,
+    news1:news1,
+    reply:reply,
+    contact:contact,
 }
