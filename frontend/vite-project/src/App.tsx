@@ -12,6 +12,8 @@ import Avaible from './Avaible/Avaible';
 import News from './News/News';
 import Post from './Post/Post';
 import Contacts from './Contacts/Contacts';
+import Auth from './Auth/Auth';
+import Admin from './Admin/Admin';
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
       <BrowserRouter>
         <Header />
           <Routes>
+            <Route index path="/" element={<Home />} />
             <Route index path="/home" element={<Home />} />
             <Route index path="/services" element={<Services/>} />
             <Route index path="/service" element={<Service/>} />
@@ -31,7 +34,8 @@ function App() {
             <Route index path="/post" element={<Post/>} />
             <Route index path="/contacts" element={<Contacts/>} />
             <Route path="/services/:slug" element={<Service />} />
-
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         <Footer />
       </BrowserRouter>

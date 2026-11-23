@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Portfolio.module.scss'
 import {im} from '../assets/im.ts'
 
@@ -118,7 +119,7 @@ function Portfolio() {
                   </div>
                   <div className="w-full h-[120px] group-hover:h-[190px] lg:group-hover:h-[200px] flex flex-col items-center justify-center text-center gap-[4px] group-hover:gap-[16px] transition-all duration-300">
                     <div className="w-[90%] flex flex-col items-center gap-[4px]">
-                      <p className="text-[18px] lg:text-[20px] font-bold text-[#1E212C] dark:text-white">{project.title}</p>
+                      <p className="text-[18px] lg:text-[20px] font-bold text-[#1E212C] dark:text-white"><NavLink to="/project">{project.title}</NavLink></p>
                       <p className="text-[14px] font-normal text-[#787A80] dark:text-[#A0A3AB]">{project.category}</p>
                     </div>
                     <button className="opacity-0 group-hover:opacity-100 h-0 group-hover:h-[44px] w-[160px] border-2 border-[#FF5A30] text-[#FF5A30] text-[14px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#FF5A30] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden">View Project</button>
@@ -160,8 +161,7 @@ function Portfolio() {
             <img src={im.clients} alt="" className="w-full lg:w-[495px] h-[300px] sm:h-[420px] lg:h-[550px] object-cover rounded-xs" />
           </div>
           <div className="w-full h-[48px] md:h-[80px]"></div>
-      </section>
-
+        </section>
         <section className="w-full flex flex-col items-center bg-[#FFFFFF] dark:bg-[#12141A] font-ubuntu transition-colors duration-300">
           <div className="w-full h-[48px] md:h-[80px] lg:h-[100px]"></div>
           <div className="w-[92%] max-w-[1230px] flex flex-col items-center gap-[32px] md:gap-[60px]">

@@ -64,6 +64,11 @@ import chat2 from './chat2.png'
 import news1 from './news1.png'
 import reply from './reply.png'
 import contact from './contact.png'
+import circle1 from './circle1.png'
+import circle2 from './circle2.png'
+import circle3 from './circle3.png'
+import circle4 from './circle4.png'
+import user from './user.png'
 
 export const im = {
     logo:logo,
@@ -132,4 +137,9 @@ export const im = {
     news1:news1,
     reply:reply,
     contact:contact,
+    circle1:circle1,
+    circle2:circle2,
+    circle3:circle3,
+    circle4:circle4,
+    user:user,
 }

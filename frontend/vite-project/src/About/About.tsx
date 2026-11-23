@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './About.module.scss'
 import {im} from '../assets/im.ts'
-import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps'
 
 
 interface StatisticItem {
@@ -33,17 +33,6 @@ interface TeamMember {
   photo_url: string;
   sort_order: number;
 }
-
-
-const geoUrl = 'https://jsdelivr.net'
-const markers = [
-  { name: 'Canada', coordinates: [-106.3468, 56.1304] as [number, number], flag: im.flagCanada },
-  { name: 'USA', coordinates: [-95.7129, 37.0902] as [number, number], flag: im.flagUsa },
-  { name: 'Germany', coordinates: [10.4515, 51.1657] as [number, number], flag: im.flagGermany },
-  { name: 'Ukraine', coordinates: [31.1656, 48.3794] as [number, number], flag: im.flagUkraine },
-  { name: 'China', coordinates: [104.1954, 35.8617] as [number, number], flag: im.flagChina },
-  { name: 'Australia', coordinates: [133.7751, -25.2744] as [number, number], flag: im.flagAustralia },
-]
 
 function About() {
   const [apiStats, setApiStats] = useState<StatisticItem[]>([]);
@@ -250,47 +239,20 @@ function About() {
                 </div>
               ))}
             </div>
-            <p className="text-[16px] sm:text-[18px] font-normal text-[#1E212C] dark:text-[#D1D3D8] text-center">Become a part of the best team in the construction market of the USA. <a href="" className="text-[#e04e28] underline">Available Positions</a></p>
+            <p className="text-[16px] sm:text-[18px] font-normal text-[#1E212C] dark:text-[#D1D3D8] text-center">Become a part of the best team in the construction market of the USA. <NavLink to="/avaible" className="text-[#e04e28]">Available Positions</NavLink></p>
           </div>
           <div className="w-full h-[48px] md:h-[80px]"></div>
         </section>
-
-        <section className="w-full flex flex-col items-center bg-[#F4F5F7] dark:bg-[#161920] font-ubuntu transition-colors duration-300">
+        {/* <section className="w-full flex flex-col items-center bg-[#F4F5F7] dark:bg-[#161920] font-ubuntu transition-colors duration-300">
           <div className="w-full h-[48px] md:h-[80px]"></div>
           <div className="w-[92%] max-w-[1230px] flex flex-col items-center gap-[32px] md:gap-[60px]">
             <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] font-extrabold text-[#1E212C] dark:text-white leading-tight text-center">We work worldwide</h2>
             <div className="w-full h-[280px] sm:h-[420px] lg:h-[560px]">
-              {/* <ComposableMap projectionConfig={{ scale: 170 }} className="w-full h-full">
-                <ZoomableGroup center={[15, 15]} zoom={1}>
-                  <Geographies geography={geoUrl}>
-                    {({ geographies }) =>
-                      geographies.map((geo) => (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          fill="#B3B7BC"
-                          stroke="#F4F5F7"
-                          strokeWidth={0.5}
-                          style={{
-                            default: { outline: 'none' },
-                            hover: { fill: '#FF5A30', outline: 'none', transition: 'all 0.2s' },
-                            pressed: { outline: 'none' },
-                          }}
-                        />
-                      ))
-                    }
-                  </Geographies>
-                  {markers.map(({ name, coordinates, flag }) => (
-                    <Marker key={name} coordinates={coordinates}>
-                      <image href={flag} x={-16} y={-16} width={32} height={32} className="cursor-pointer" />
-                    </Marker>
-                  ))}
-                </ZoomableGroup>
-              </ComposableMap> */}
+              
             </div>
           </div>
           <div className="w-full h-[48px] md:h-[80px]"></div>
-        </section>
+        </section> */}
       </main>
     </>
   )

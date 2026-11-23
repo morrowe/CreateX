@@ -197,7 +197,7 @@ function Project() {
             </div>
             <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-[20px] sm:gap-[40px] text-center">
               <h4 className="text-[22px] sm:text-[28px] font-bold text-[#1E212C] dark:text-white">Explore all our works</h4>
-              <NavLink to="/portfolio" className="w-full sm:w-[214px] h-[52px] flex items-center justify-center bg-[#FF5A30] text-white text-[16px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#e04e28] transition-colors cursor-pointer">View portfolio</NavLink>
+              <NavLink to="/portfolio"><button className="w-full sm:w-[214px] h-[52px] bg-[#FF5A30] text-white text-[16px] font-bold uppercase tracking-wider rounded-sm hover:bg-[#e04e28] transition-colors cursor-pointer">View portfolio</button></NavLink>
             </div>
           </div>
           <div className="w-full h-[48px] md:h-[80px] lg:h-[100px]"></div>
